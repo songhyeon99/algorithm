@@ -22,7 +22,8 @@ public class GroupWord {
                     } else{
                         Alphabet[word.charAt(j) - 97] = true;
                     }
-                }}
+                }
+            }
                 System.out.println(num - count);
         }
 
