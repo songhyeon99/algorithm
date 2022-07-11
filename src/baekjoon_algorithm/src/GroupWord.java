@@ -25,6 +25,7 @@ public class GroupWord {
                 }
             }
                 System.out.println(num - count);
+
         }
 
 
