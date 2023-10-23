@@ -1,9 +1,9 @@
-package baekjoon_algorithm.src;
+package baekjoon;
 
 import java.util.*;
 
 
-public class BeeHouse {
+public class Baekjoon_2292 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int range = 2;

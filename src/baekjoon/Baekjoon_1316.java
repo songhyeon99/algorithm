@@ -1,9 +1,9 @@
-package baekjoon_algorithm.src;
+package baekjoon;
 
 import java.util.*;
 
 
-public class GroupWord {
+public class Baekjoon_1316 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("숫자 입력하세요>> ");
