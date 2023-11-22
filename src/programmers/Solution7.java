@@ -1,7 +1,7 @@
 package programmers;
 
 import java.util.*;
-class Solution {
+class Solution7 {
     public int[] solution(int[] prices) {
         int[] answer = new int[prices.length];
         int time=0;
