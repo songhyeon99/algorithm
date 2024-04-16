@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    static int N, P1, P2, M, depth = 0;
+    static int N, P1, P2, M;
     static boolean[] visited;
     static boolean[][] map;
 
