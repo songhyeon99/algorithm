@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
@@ -28,7 +26,7 @@ public class Main {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (!visited[i][j]) {
-                    bfs(i, j);
+                    dfs(i, j);
                     color++;
                 }
             }
@@ -46,41 +44,28 @@ public class Main {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (!visited[i][j]) {
-                    bfs(i, j);
+                    dfs(i, j);
                     blindness++;
                 }
             }
         }
 
-        System.out.println(color+" "+blindness);
+        System.out.println(color + " " + blindness);
     }
 
-    static void bfs(int x, int y) {
-        Queue<Position> queue = new LinkedList<>();
-        queue.add(new Position(x, y));
+    static void dfs(int x, int y) {
         visited[x][y] = true;
         char c = map[x][y];
 
-        while (!queue.isEmpty()) {
-            Position currentPosition = queue.poll();
-            for (int i = 0; i < 4; i++) {
-                int newX = dx[i] + currentPosition.x;
-                int newY = dy[i] + currentPosition.y;
+        for (int i = 0; i < 4; i++) {
+            int newX = dx[i] + x;
+            int newY = dy[i] + y;
 
-                if (newX >= 0 && newY >= 0 && newX < N && newY < N && !visited[newX][newY] && map[newX][newY] == c) {
-                    bfs(newX, newY);
-                }
+            if (newX >= 0 && newY >= 0 && newX < N && newY < N && !visited[newX][newY] && map[newX][newY] == c) {
+                visited[newX][newY] = true;
+                dfs(newX, newY);
             }
         }
-    }
 
-    static class Position {
-
-        int x, y;
-
-        public Position(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
     }
 }
