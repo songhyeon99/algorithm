@@ -9,7 +9,7 @@ public class Main {
 		int[] arrN = new int[N];
 		int[] arrM = new int[N];
 
-		int result = 0;
+		long result = 0;
 
 		for(int i = 0; i<N-1; i++){
 			arrM[i] = sc.nextInt();
@@ -19,7 +19,7 @@ public class Main {
 			arrN[i] = sc.nextInt();
 		}
 
-		int min = arrN[0];
+		long min = arrN[0];
 		result = min * arrM[0];
 		for(int i = 1; i<N-1; i++){
 			if(arrN[i] < min){
