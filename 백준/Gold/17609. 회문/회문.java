@@ -41,7 +41,6 @@ public class Main {
 		while (left < right) {
 			if (str.charAt(left) != str.charAt(right)) {
 				if (!changed) {
-					// Check by removing one character either from the left or the right
 					return isPalindrome(str.substring(left + 1, right + 1)) ||
 						isPalindrome(str.substring(left, right));
 				} else {
