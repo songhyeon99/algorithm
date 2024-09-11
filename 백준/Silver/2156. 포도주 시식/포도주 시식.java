@@ -17,10 +17,9 @@ public class Main {
 			if (i == 2) {
 				dp[i] = arr[i] + arr[i - 1];
 			} else {
-				dp[i] = Math.max(dp[i-1] ,Math.max(dp[i - 2] + arr[i], arr[i - 1] + dp[i - 3] + arr[i]));
+				dp[i] = Math.max(Math.max(dp[i - 2], arr[i - 1] + dp[i - 3]) + + arr[i], dp[i-1]);
 			}
 		}
 		System.out.println(dp[N]);
-
 	}
 }
