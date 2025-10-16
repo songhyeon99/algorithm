@@ -4,16 +4,18 @@ import java.io.*;
 class Solution {
     public int solution(String[] want, int[] number, String[] discount) {
         int answer = 0;
-        Set<String> wantSet = new HashSet<>(Arrays.asList(want));
-        List<String> wantList = Arrays.asList(want);
+         Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < want.length; i++) {
+            map.put(want[i], i);
+        }
         int[] count = new int[number.length];
         
         int days = 0;
         for(int i = 0; i<=discount.length-10; i++){
             for(int j = i; j<i+10; j++){
-            if(wantSet.contains(discount[j]) &&
-               count[wantList.indexOf(discount[j])] < number[wantList.indexOf(discount[j])]) {
-                count[wantList.indexOf(discount[j])]++;
+            if(map.containsKey(discount[j]) &&
+               count[map.get(discount[j])] < number[map.get(discount[j])]) {
+                count[map.get(discount[j])]++;
                 days++;
             }else{
                 count = new int[number.length];
