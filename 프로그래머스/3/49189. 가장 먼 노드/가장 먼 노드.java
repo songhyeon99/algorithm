@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 class Solution {
-    static Map<Integer, List<Integer>> maps = new HashMap<>();
+    static List<Integer>[] graph;
     static Queue<Integer> queue = new LinkedList<>();
     
     static boolean[] visited;
@@ -12,18 +12,20 @@ class Solution {
     static int answer=0;
     
     public int solution(int n, int[][] edge) {
+        graph = new ArrayList[n+1];
         count = new int[n+1];
         visited = new boolean[n+1];
         
+        for(int i = 0 ;i <= n; i++) {
+            graph[i] = new ArrayList<>();
+        }
+        
         for(int i = 0; i<edge.length; i++ ){
-            int key = edge[i][0];
-            int value = edge[i][1];
+            int a = edge[i][0];
+            int b = edge[i][1];
             
-            maps.putIfAbsent(key, new ArrayList<>());
-            maps.putIfAbsent(value, new ArrayList<>());
-
-            maps.get(key).add(value);
-            maps.get(value).add(key);
+            graph[a].add(b);
+            graph[b].add(a);
         }
         queue.add(1);
         visited[1]=true;
@@ -34,7 +36,7 @@ class Solution {
     public void bfs() {
         while(!queue.isEmpty()) {
             int cur = queue.poll();
-                List<Integer> list = maps.get(cur);
+                List<Integer> list = graph[cur];
                 int len = list.size();
 
                 for(int i = 0; i<len; i++) {
