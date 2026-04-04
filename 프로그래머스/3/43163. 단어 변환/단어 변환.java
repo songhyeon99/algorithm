@@ -1,46 +1,61 @@
+import java.io.*;
 import java.util.*;
+
 class Solution {
-    static boolean isDone;
+    static Queue<Position> q = new LinkedList<>();
     static boolean[] visited;
-    static int result = 0, count = 0;
+    static int answer = 0;
+    
     public int solution(String begin, String target, String[] words) {
         visited = new boolean[words.length];
         
-        List<String> list  = List.of(words);
-		if(!list.contains(target)){
-			return 0;
-		}else {
-			dfs(begin, target, words);
-			return result;
-		}
+        boolean result = bfs(begin, target, words);
+        
+        return result ? answer : 0;
     }
     
-    static int dfs(String word, String target, String[] words){
-		for (int i = 0; i < words.length; i++) {
-			if(!visited[i]) {
-				if(compare(word, target) == 1){
-					result++;
-					isDone = true;
-					return result;
-				}
-				if (compare(word, words[i]) == 1) {
-					visited[i] = true;
-					result++;
-					dfs(words[i], target, words);
-					if(isDone) return result;
-				}
-			}
-		}
-        return result;
+    boolean bfs(String word, String target, String[] words) {
+        q.add(new Position(word, 0));
+        
+        while(!q.isEmpty()) {
+            Position current = q.poll();
+            if(target.equals(current.word)) {
+                answer = current.count;
+                return true;
+            }
+            
+            for(int i = 0; i<words.length; i++) {
+                if(!visited[i]){
+                    int check = compareWord(current.word, words[i]);
+                    if(check == 1) {
+                        q.add(new Position(words[i], current.count + 1));
+                        visited[i] = true;
+                    }
+
+                }
+            }
+        }
+        return false;
     }
     
-    static int compare(String current, String word){
-		int count = 0;
-		for (int j = 0; j < word.length(); j++) {
-			if (current.charAt(j) != word.charAt(j)) {
-				count++;
-			}
-		}
-		return count;
-	}
+    int compareWord(String curWord, String nextWord) {
+        int count = 0;
+        for(int i = 0; i < curWord.length(); i++) {
+            if(curWord.charAt(i) != nextWord.charAt(i)) {
+                count++;
+            }
+        }
+        
+        return count;
+    }
+    
+    class Position {
+        String word;
+        int count;
+        
+        Position(String word, int count) {
+            this.word = word;
+            this.count = count;
+        }
+    }
 }
