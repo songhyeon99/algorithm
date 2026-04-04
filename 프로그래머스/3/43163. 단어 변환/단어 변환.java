@@ -9,19 +9,19 @@ class Solution {
     public int solution(String begin, String target, String[] words) {
         visited = new boolean[words.length];
         
-        boolean result = bfs(begin, target, words);
+        bfs(begin, target, words);
         
-        return result ? answer : 0;
+        return answer;
     }
     
-    boolean bfs(String word, String target, String[] words) {
+    void bfs(String word, String target, String[] words) {
         q.add(new Position(word, 0));
         
         while(!q.isEmpty()) {
             Position current = q.poll();
             if(target.equals(current.word)) {
                 answer = current.count;
-                return true;
+                return;
             }
             
             for(int i = 0; i<words.length; i++) {
@@ -35,7 +35,6 @@ class Solution {
                 }
             }
         }
-        return false;
     }
     
     int compareWord(String curWord, String nextWord) {
