@@ -2,31 +2,25 @@ import java.io.*;
 import java.util.*;
 
 class Solution {
-    static int answer;
+    static int answer = -1;
+    static boolean[] visited;
     public int solution(int k, int[][] dungeons) {
-        answer = -1;
-        boolean[] visited = new boolean[dungeons.length];
+        visited = new boolean[dungeons.length];
         
-        int count = dfs(k, dungeons, visited, 0, 0);
+        dfs(k, 0, dungeons);
         
         return answer;
     }
     
-    int dfs(int current, int[][] dungeons, boolean[] visited, int count, int depth) {
-        if(depth == dungeons.length){
-            return count;
-        }
-        
+    int dfs(int currentK, int count, int[][] dungeons) {
         for(int i = 0; i<dungeons.length; i++) {
-            if(!visited[i]){
-                if(current >= dungeons[i][0]) {
-                    int nextCurrent = current - dungeons[i][1];
-                    int nextCount = count+1;
-                    visited[i] = true;
-                    int result = dfs(nextCurrent, dungeons, visited, nextCount, depth+1);
-                    answer = answer < result ? result : answer;
-                    visited[i] = false;
-                }
+            if(!visited[i] && currentK >= dungeons[i][0]) {
+                int nextK = currentK - dungeons[i][1];
+                int nextCount = count + 1;
+                visited[i] = true;
+                int temp = dfs(nextK, nextCount, dungeons);
+                answer = temp > answer ? temp : answer;
+                visited[i] = false;
             }
         }
         return count;
